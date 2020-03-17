@@ -18,19 +18,17 @@ public class Servidor {
             System.out.println("Cliente: " + o_cliente.getInetAddress().getHostAddress() + " conectado");
             
            
-            
-            InputStream ex = o_cliente.getInputStream();
-            
-            Scanner lerDoSocketCliente = new Scanner(ex);
+             
+            Scanner lerDoSocketCliente = new Scanner(o_cliente.getInputStream());
             
             //botei aqui
             PrintStream saidaServidor = new PrintStream(o_cliente.getOutputStream());
             Scanner teclado = new Scanner(System.in);
             
+            Escreve escreve = new Escreve(lerDoSocketCliente);
+            escreve.start();
             
-            
-            while(lerDoSocketCliente.hasNextLine()){
-                System.out.println(lerDoSocketCliente.nextLine());
+            while(teclado.hasNextLine()){
                 saidaServidor.println(teclado.nextLine());
             }
             

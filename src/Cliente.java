@@ -19,16 +19,16 @@ public class Cliente {
             
             
             //botei aqui
-            InputStream ex = iniciador.getInputStream();
-            Scanner lerDoSocketServidor = new Scanner(ex);
+            Scanner lerDoSocketServidor = new Scanner(iniciador.getInputStream());
+            
+            Escreve escreve = new Escreve(lerDoSocketServidor);
+            escreve.start();
             
             while(teclado.hasNextLine()){
-                
                 saidaCliente.println(teclado.nextLine());
-                System.out.println(lerDoSocketServidor.nextLine());
-                
-                
             }
+            
+            
         } catch (UnknownHostException  ex) {
             ex.printStackTrace();
         }catch (IOException ex) {
